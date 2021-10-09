@@ -1,5 +1,7 @@
 <?php
-
+if(isset($_POST['username'],$_POST['message'])) {
+    
+} 
 $title = "Livre d'or" ;
 require 'elements/header.php';
 ?>
