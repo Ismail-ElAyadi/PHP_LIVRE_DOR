@@ -17,12 +17,12 @@ class Message {
         return strlen($this->username) >= self::MIN_CHAR_USERNAME && strlen($this->message) >= self::MIN_CHAR_MESSAGE;
     }
 
-    public function getErrors():array  {
+    public function getErrors() : array  {
         $errors = [];
-        if($this->username<= self::MIN_CHAR_USERNAME){
+        if(strlen($this->username) < self::MIN_CHAR_USERNAME){
             $errors["username"] = "Pseudo trop court" ;
         }
-        if($this->message<= self::MIN_CHAR_MESSAGE){
+        if(strlen($this->message)< self::MIN_CHAR_MESSAGE){
             $errors["message"] = "Message trop court" ;
         }
         return $errors;
