@@ -22,11 +22,11 @@ $title = "Livre d'or";
 require 'elements/header.php';
 ?>
 <div class="container">
-    <h1>Livre d'or</h1>
+    <h1>Livre d'ossr</h1>
     <form class="col-12" action="" method="post">
         <?php if (isset($alert) && $alert->isUsable()) : ?>
-            <div class="<?= $alert->getClass() ?>">
-                <?= $alert->getMessage() ?>
+            <div class="<?= $alert->html_class ?>">
+                <?= $alert->message ?>
             </div>
         <?php endif ?>
 
@@ -34,8 +34,9 @@ require 'elements/header.php';
             <label for="username">Pseudo</label>
             <?php if (isset($error["username"])) : ?>
                 <?php $username_error = new Alert(false, $error["username"]); ?>
-                <p class="<?= $username_error->getClass() ?>">
-                    <?= $username_error->getMessage(); ?>
+                <p class="<?= $username_error->html_class ?>">
+                    <?= $username_error->message; ?>
+                    
                 </p>
             <?php endif ?>
 
@@ -46,8 +47,9 @@ require 'elements/header.php';
             <label for="message">Commentaire</label>
             <?php if (isset($error["message"])) : ?>
                 <?php $message_error = new Alert(false, $error["message"]); ?>
-                <p class="<?= $message_error->getClass() ?>">
-                    <?= $message_error->getMessage(); ?>
+                <p class="<?= $message_error->html_class ?>">
+                    <?= $message_error->message; ?>
+                    
                 </p>
 
             <?php endif ?>
