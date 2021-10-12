@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'class' . DIRECTORY_SEPARATOR . 'Message.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'class' . DIRECTORY_SEPARATOR . 'Alert.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'class' . DIRECTORY_SEPARATOR . 'GuestBook.php';
 
 $sucess_form = "Formulaire correcte";
 $fail_form = "Formulaire incorrecte";
@@ -12,6 +13,8 @@ if (isset($_POST['username'], $_POST['message'])) {
     if ($message->isValid()) {
         $error = [];
         $alert= new Alert(true, $sucess_form);
+        $guestbook = new GuestBook(__DIR__.DIRECTORY_SEPARATOR. "data". DIRECTORY_SEPARATOR."messages");
+        $guestbook->addMessage($message);
     } else {
         $alert= new Alert(false, $fail_form);
         $error = $message->getErrors();
@@ -36,7 +39,7 @@ require 'elements/header.php';
                 <?php $username_error = new Alert(false, $error["username"]); ?>
                 <p class="<?= $username_error->html_class ?>">
                     <?= $username_error->message; ?>
-                    
+
                 </p>
             <?php endif ?>
 
@@ -49,7 +52,7 @@ require 'elements/header.php';
                 <?php $message_error = new Alert(false, $error["message"]); ?>
                 <p class="<?= $message_error->html_class ?>">
                     <?= $message_error->message; ?>
-                    
+
                 </p>
 
             <?php endif ?>
