@@ -8,22 +8,23 @@ $error = null;
 if (isset($_POST['username'], $_POST['message'])) {
     $message = new Message($_POST['username'], $_POST['message']);
 
-    $alert = new Alert();
+    $alert = null;
     if ($message->isValid()) {
         $error = [];
-        $alert->resetAlert(true, $sucess_form);
+        $alert= new Alert(true, $sucess_form);
     } else {
-        $alert->resetAlert(false, $fail_form);
+        $alert= new Alert(false, $fail_form);
         $error = $message->getErrors();
     }
 }
+
 $title = "Livre d'or";
 require 'elements/header.php';
 ?>
 <div class="container">
     <h1>Livre d'or</h1>
     <form class="col-12" action="" method="post">
-        <?php if ($alert->isUsable()) : ?>
+        <?php if (isset($alert) && $alert->isUsable()) : ?>
             <div class="<?= $alert->getClass() ?>">
                 <?= $alert->getMessage() ?>
             </div>
@@ -33,10 +34,10 @@ require 'elements/header.php';
             <label for="username">Pseudo</label>
             <?php if (isset($error["username"])) : ?>
                 <?php $username_error = new Alert(false, $error["username"]); ?>
-                    <p class="<?= $username_error->getClass() ?>">
-                        <?= $username_error->getMessage(); ?>
-                    </p>
-                <?php endif ?>
+                <p class="<?= $username_error->getClass() ?>">
+                    <?= $username_error->getMessage(); ?>
+                </p>
+            <?php endif ?>
 
             <input type="text" class="form-control" name="username" placeholder="Votre pseudo" id="">
         </div>
@@ -44,10 +45,10 @@ require 'elements/header.php';
         <div class="form-group col-12">
             <label for="message">Commentaire</label>
             <?php if (isset($error["message"])) : ?>
-                <?php $message_error = new Alert(false, $error["message"]);?>
-                    <p class="<?= $message_error->getClass() ?>">
-                        <?= $message_error->getMessage(); ?>
-                    </p>
+                <?php $message_error = new Alert(false, $error["message"]); ?>
+                <p class="<?= $message_error->getClass() ?>">
+                    <?= $message_error->getMessage(); ?>
+                </p>
 
             <?php endif ?>
             <textarea class="col-12" name="message" id="" cols="30" rows="10"></textarea>

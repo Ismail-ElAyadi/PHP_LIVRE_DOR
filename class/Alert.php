@@ -12,11 +12,7 @@ class Alert {
         $this->message = $message ; 
     }
 
-    public function resetAlert(bool $is_Success, string $message):void
-    {
-        $is_Success ? $this->html_class = self::SUCCESS_CLASS :$this->html_class = self::FAIL_CLASS ;
-        $this->message = $message ; 
-    }
+
 
     public function getMessage():string
     {
