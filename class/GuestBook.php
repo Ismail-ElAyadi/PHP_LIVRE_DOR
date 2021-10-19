@@ -9,7 +9,7 @@ class GuestBook
     {
         $directory = dirname($file);
         if (!is_dir($directory)) {
-            var_dump(mkdir($directory, 777, true));
+            var_dump(mkdir($directory, 0777, true));
         }
         if (!file_exists($file)) {
             touch($file);
